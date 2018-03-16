@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,7 @@ public class SessaoController {
 	@Autowired
 	private SessaoDao sessaoDao;
 
+	@GetMapping("/admin/sessao")
 	public ModelAndView form(@RequestParam("salaId") Integer salaId, SessaoForm form) {
 
 		form.setSalaId(salaId);
@@ -42,7 +44,7 @@ public class SessaoController {
 		return modelAndView;
 	}
 
-	@PostMapping(value = "/sala/sesso")
+	@PostMapping(value = "/admin/sessao")
 	@Transactional
 	public ModelAndView salva(@Valid SessaoForm form, BindingResult result) {
 
@@ -59,4 +61,5 @@ public class SessaoController {
 		}
 		return form(form.getSalaId(), form);
 	}
+	
 }
